@@ -1,1 +1,1 @@
-shell I/0 redirections
+hello world script
