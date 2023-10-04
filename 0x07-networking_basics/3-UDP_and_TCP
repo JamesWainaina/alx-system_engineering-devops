@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #the script explains about UPD and TCP
 
-1.It is a protocol that is transferring data in a slow way but surely2.It is a protocol that is transferring data in a fast way and might loss data along in the process
-3.Have you received boxes x, y, z?
+1
+2
+3
