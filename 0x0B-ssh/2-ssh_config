@@ -1,0 +1,12 @@
+# ssh_config
+# client configuration file not to ask for password
+
+Host *
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    HostName 10.247.166.22
+    User ubuntu
+
