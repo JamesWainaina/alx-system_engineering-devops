@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# script that configures nginx as an nginx user and ngingx must be listening on port 8080.
+chmod 666 /etc/nginx/nginx.conf
+chmod nginx /etc/nginx/nginx.conf
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+pkill apache2
+sudo -u nginx service nginx restart
