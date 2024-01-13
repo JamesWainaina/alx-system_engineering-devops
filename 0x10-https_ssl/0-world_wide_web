@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# displays info about subdomains
+
+domain="$1"
+
+if [[ -n "$2" ]]; then
+   subdomain="$2"
+   full="$subdomain.$domain"
+   dig "$full" | grep -A1 "ANSWER SECTION" | awk -v subd="$subdomain" '/IN/ {print "The subdomain "subd" is a "$4,"record and points to "$NF;}'
+else
+	declare -a subs
+	subs=("www" "lb-01" "web-01" "web-02")
+	for i in "${subs[@]}"; do
+	    full="$i.$domain"
+	    dig "$full" | grep -A1 "ANSWER SECTION"| awk -v subd="$i" '/IN/ {print "The subdomain "subd" is a "$4,"record and points to "$NF;}'
+	done
+fi
