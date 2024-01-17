@@ -1,9 +1,23 @@
-#!/usr/bin/env bash 
-#write a bash script that configures a new ubuntu machine
-#respect When querying Nginx at its root / with a GET request (requesting a page) using curl, it must return a page that contains the string Hello World!
+#!/usr/bin/env bash
+# configure new Ubuntu machine using a bash script
+# install Nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
-sudo apt-get -y update
-sudo apt-get -y install ngingx
-ufw allow 'Ngingx HTTP'
-echo 'Hello World!' > /var/www/html/index.html
-sudo service ngingx start
+# setup custom HTML file
+sudo cat <<- _EOF_ > /var/www/html/index.html
+     Hello World!
+_EOF_
+
+# config Nginx to listen on port 80
+sudo cat <<- _EOF_ > /etc/nginx/sites_available/default
+	server {
+		location / {
+			root /var/www/html;
+			index.html;
+		}
+	}
+_EOF_
+
+# start Nginx
+sudo service nginx start
