@@ -15,6 +15,7 @@ backend web-backend
         server 188190-web-01 35.168.3.210:80 check
         server 188190-web-02 52.91.135.13:80 check
 	">> /etc/haproxy/haproxy.cfg
+sudo chmod +x /etc/init.d/haproxy
 #check if haproxy is running
 #if systemctl is-active --quiet haproxy; then
 #	service haproxy reload
