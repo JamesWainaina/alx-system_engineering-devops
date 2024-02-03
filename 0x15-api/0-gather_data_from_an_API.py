@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 Script that using REST API for a given employee id returns information
 about his/her TODO list progress
@@ -6,6 +7,7 @@ about his/her TODO list progress
 
 import requests
 from sys import argv
+
 
 if __name__ == "__main__":
     total = 0
@@ -17,12 +19,12 @@ if __name__ == "__main__":
     employee_name = (requests.get(employee_url)).json().get("name")
     tasks = requests.get(tasks_url)
     for task in tasks.json():
-        total += 1
-        if (task.get("completed")):
-            completed += 1
-    print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, completed, total))
-
+        if (task.get("userId") == employee_id):
+            total += 1
+            if (task.get("completed")):
+                completed += 1
+    print("Employee {} is done with tasks({}/{}):".format(employee_name,
+                                                          completed, total))
     for task in tasks.json():
         if (task.get("userId") == employee_id):
             if (task.get("completed")):
