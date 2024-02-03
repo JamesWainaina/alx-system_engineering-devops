@@ -26,4 +26,3 @@ if __name__ == "__main__":
                              "username": user_name}
                 user_list.append(user_dict)
         f.write(json.dumps({argv[1]: user_list}))
-        
