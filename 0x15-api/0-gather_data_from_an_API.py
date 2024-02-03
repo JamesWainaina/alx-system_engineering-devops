@@ -8,7 +8,7 @@ import requests
 from sys import argv
 
 if __name__ == "__main__":
-    total = 0 
+    total = 0
     completed = 0
     employee_url = "https://jsonplaceholder.typicode.com/users/" + argv[1]
     tasks_url = "https://jsonplaceholder.typicode.com/todos"
@@ -20,7 +20,8 @@ if __name__ == "__main__":
         total += 1
         if (task.get("completed")):
             completed += 1
-    print("Employee {} is done with tasks({}/{}):".format(employee_name,completed, total))
+    print("Employee {} is done with tasks({}/{}):"
+          .format(employee_name, completed, total))
 
     for task in tasks.json():
         if (task.get("userId") == employee_id):
