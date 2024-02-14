@@ -11,13 +11,10 @@ def number_of_subscribers(subreddit):
             "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
         }
     response = requests.get(url, headers=headers, allow_redirects=False)
+
+    data = response.json()
+
     try:
-        if response.status_code == 404:
-            return 0
-        else:
-            results = response.json().get("data")
-            return results.get("subscribers")
+        return data['data']['subscribers']
     except Exception:
         return 0
-        
-
