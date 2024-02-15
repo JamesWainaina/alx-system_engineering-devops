@@ -19,9 +19,6 @@ def recurse(subreddit, hot_list=[], after=None):
     if response.status_code == 200:
         data = response.json()['data']
         hot_list += [post['data']['title'] for post in data['children']]
-        """
-        Rercursively call the function
-        """
         if data['after']:
             recurse(subreddit, hot_list, after=data['after'])
         return hot_list
