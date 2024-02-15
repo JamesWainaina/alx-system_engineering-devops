@@ -1,6 +1,9 @@
 #!/usr/bin/python3
+"""
+fetching apis for the first 10 hot posts
+"""
 import requests
-"""fetching apis for the first 10 hot posts"""
+
 
 def top_ten(subreddit):
     """printing the titles of the first 10 hot posts"""
