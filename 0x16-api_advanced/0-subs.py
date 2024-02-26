@@ -1,4 +1,4 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
 """srcipt that queries users of a singel sub-reddit"""
 import requests
 
