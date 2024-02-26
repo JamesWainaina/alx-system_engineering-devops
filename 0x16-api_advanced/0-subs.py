@@ -1,32 +1,36 @@
-#!/usr/bin/python3
 import requests
 
-
 def number_of_subscribers(subreddit):
-    # Reddit API endpoint subreddit information
-    url = f'https://sww.reddit.com/r/{subreddit}/about.json'
-
-    # set a custom User-Agent to avoid Too Many Requests errors
+    # Reddit API endpoint for subreddit information
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    
+    # Set a custom User-Agent to avoid Too Many Requests errors
     headers = {'User-Agent': 'YourAppName/1.0'}
 
     try:
         # Make a GET request to the Reddit API
         response = requests.get(url, headers=headers)
-        # Check if the request was succeeesful (status code 200)
-        if response.status_code == 200:
-            # Parse the JSON response
-            data = response.json()
+        
+        # Raise an exception for bad responses (status codes other than 200)
+        response.raise_for_status()
 
-            # Extract and return the number of subscribers
-            return data['data']['subscribers']
-        # Check if the subreddit is invalid (status code 404)
-        elif response.status_code == 404:
-            print(f"Subreddit '{subreddit}' not found.")
-            return 0
-        else:
-            # Handle other status codes if needed
-            print(f"Error:{response.status_code}")
-            return 0
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        # Parse the JSON response
+        data = response.json()
+        
+        # Extract and return the number of subscribers
+        return data['data']['subscribers']
+    
+    except requests.exceptions.HTTPError as http_err:
+        # Handle HTTP errors (e.g., 404 Not Found)
+        print(f"HTTP error occurred: {http_err}")
         return 0
+    
+    except requests.exceptions.RequestException as req_err:
+        # Handle other request-related errors
+        print(f"Request error occurred: {req_err}")
+        return 0
+
+# Example usage:
+subreddit_name = 'python'
+subscribers_count = number_of_subscribers(subreddit_name)
+print(f"The number of subscribers in r/{subreddit_name} is: {subscribers_count}")
