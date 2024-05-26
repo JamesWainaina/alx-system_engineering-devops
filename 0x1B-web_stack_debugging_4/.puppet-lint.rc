@@ -1,0 +1,9 @@
+# .puppet-lint.rc
+
+--no-80chars-check
+--with-filename
+--no-documentation-check
+--autoloader-check
+--class_parameter_order-check
+--no-arrow_alignment-check
+
